@@ -1,0 +1,11 @@
+package uz.zero.user
+
+
+
+enum class ErrorCode(val code: Int) {
+    USERNAME_ALREADY_EXSISTS(100),
+    USER_NOT_FOUND(101),
+    USER_NOT_FOUND_OR_ALREADY_EXSISTS(102),
+    EMAIL_ALREADY_EXSISTS(103),
+    INVALID_PASSWORD(104)
+}

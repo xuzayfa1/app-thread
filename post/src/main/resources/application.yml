@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: post
+  profiles:
+    active: local
+  config:
+    import: "optional:configserver:http://localhost:8888"
+  cloud:
+    config:
+      fail-fast: true # Serverga ulanolmasa darrov xato beradi (foydali)
+      username: user
+      password: nimadirxavfsizlik # Config serverdagi xavfsizlik paroli
