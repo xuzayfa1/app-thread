@@ -69,6 +69,10 @@ class PostNotFoundException : MyException() {
     override fun errorType() = ErrorCode.POST_NOT_FOUND
 }
 
+class UserNotFoundException : MyException() {
+    override fun errorType() = ErrorCode.USER_NOT_FOUND
+}
+
 class PostAlreadyLinkedException : MyException() {
     override fun errorType() = ErrorCode.POST_ALREADY_LINKED
 }

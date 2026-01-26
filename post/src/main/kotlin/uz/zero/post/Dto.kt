@@ -41,3 +41,10 @@ data class CommentResponse(
     val postId: Long, 
     val createdDate: Date?
 )
+
+data class UserResponseDto(val id: Long)
+
+data class LikeResponse(
+    val message: String,
+    val postId: Long,
+)

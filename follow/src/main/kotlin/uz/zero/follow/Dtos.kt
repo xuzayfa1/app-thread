@@ -6,10 +6,7 @@ data class FollowRequest(
 )
 
 data class FollowResponse(
-    val id: Long,
-    val followerId: Long,
-    val followingId: Long,
-    val followedAt: java.util.Date?
+    val message: String,
 )
 
 data class BaseMessage(val code: Int? = null, val message: String? = null) {

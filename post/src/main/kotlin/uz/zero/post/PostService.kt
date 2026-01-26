@@ -6,7 +6,7 @@ import org.springframework.web.multipart.MultipartFile
 
 interface PostService {
     fun createPost(userId: Long, content: String, parentId: Long?, files: List<MultipartFile>?): PostResponse
-    fun toggleLike(postId: Long, userId: Long)
+    fun toggleLike(postId: Long, userId: Long): LikeResponse
     fun addComment(postId: Long, userId: Long, text: String): CommentResponse
     fun getFullThread(postId: Long): List<PostResponse>
     fun deletePost(postId: Long)
@@ -16,11 +16,17 @@ interface PostService {
 class PostServiceImpl(
     private val postRepository: PostRepository,
     private val fileService: FileService,
-    private val commentRepository: CommentRepository
+    private val commentRepository: CommentRepository,
+    private val userClient: UserClient
 ) : PostService {
 
     @Transactional
     override fun createPost(userId: Long, content: String, parentId: Long?, files: List<MultipartFile>?): PostResponse {
+        try {
+            userClient.getById(userId)
+        } catch (e: Exception) {
+            throw UserNotFoundException()
+        }
         val newPost = Post(userId = userId, content = content)
         files?.forEach { file ->
             val url = fileService.upload(file)
@@ -41,18 +47,37 @@ class PostServiceImpl(
     }
 
     @Transactional
-    override fun toggleLike(postId: Long, userId: Long) {
+    override fun toggleLike(postId: Long, userId: Long): LikeResponse {
+        try {
+            userClient.getById(userId)
+        } catch (e: Exception) {
+            throw UserNotFoundException()
+        }
         val post = postRepository.findByIdAndDeletedFalse(postId) ?: throw PostNotFoundException()
+
+        val message: String
+
         if (post.likedUserIds.contains(userId)) {
             post.likedUserIds.remove(userId)
+            message = "Siz ushbu postdan likeni olib tashladingiz"
         } else {
             post.likedUserIds.add(userId)
+            message = "Siz ushbu postga like bosdingiz"
         }
         postRepository.save(post)
+        return LikeResponse(
+            message = message,
+            postId = postId,
+        )
     }
 
     @Transactional
     override fun addComment(postId: Long, userId: Long, text: String): CommentResponse {
+        try {
+            userClient.getById(userId)
+        } catch (e: Exception) {
+            throw UserNotFoundException()
+        }
 
         val post = postRepository.findByIdAndDeletedFalse(postId) ?: throw PostNotFoundException()
         val comment = Comment(

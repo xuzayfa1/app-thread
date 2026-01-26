@@ -5,6 +5,7 @@ enum class ErrorCode(val code: Int) {
     POST_NOT_FOUND(101),
     ROOT_POST_NOT_FOUND_OR_IT_DELETED(102),
     COMMENT_NOT_FOUND(103),
+    USER_NOT_FOUND(104)
 }
 
 enum class MediaType{

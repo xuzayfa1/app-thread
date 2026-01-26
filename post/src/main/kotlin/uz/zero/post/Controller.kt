@@ -20,9 +20,9 @@ class PostController(private val postService: PostService) {
     }
 
     @PostMapping("/{postId}/like")
-    fun like(@PathVariable postId: Long, @RequestParam userId: Long): ResponseEntity<Unit> {
-        postService.toggleLike(postId, userId)
-        return ResponseEntity.ok().build()
+    fun like(@PathVariable postId: Long, @RequestParam userId: Long): ResponseEntity<LikeResponse> {
+        val result = postService.toggleLike(postId, userId)
+        return ResponseEntity.ok(result)
     }
 
     @PostMapping("/{postId}/comment")
