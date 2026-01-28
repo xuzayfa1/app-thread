@@ -23,7 +23,6 @@ open class BaseEntity(
     )
 
 
-
 @Entity
 @Table(name = "users", schema = "user_management")
 class User(

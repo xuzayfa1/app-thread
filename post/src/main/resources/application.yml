@@ -7,6 +7,6 @@ spring:
     import: "optional:configserver:http://localhost:8888"
   cloud:
     config:
-      fail-fast: true # Serverga ulanolmasa darrov xato beradi (foydali)
+      fail-fast: true
       username: user
-      password: nimadirxavfsizlik # Config serverdagi xavfsizlik paroli
+      password: nimadirxavfsizlik

@@ -15,9 +15,9 @@ interface PostService {
 @Service
 class PostServiceImpl(
     private val postRepository: PostRepository,
-    private val fileService: FileService,
     private val commentRepository: CommentRepository,
-    private val userClient: UserClient
+    private val userClient: UserClient,
+    private val fileClient: FileClient,
 ) : PostService {
 
     @Transactional
@@ -28,9 +28,10 @@ class PostServiceImpl(
             throw UserNotFoundException()
         }
         val newPost = Post(userId = userId, content = content)
-        files?.forEach { file ->
-            val url = fileService.upload(file)
-            newPost.mediaUrls.add(url)
+        files?.filter { !it.isEmpty }?.forEach { file ->
+            val response = fileClient.upload(file)
+            val fileUrl = response["url"] ?: throw FileIsNotUploadException()
+            newPost.mediaUrls.add(fileUrl)
         }
 
         if (parentId != null) {

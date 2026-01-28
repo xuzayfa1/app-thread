@@ -84,3 +84,7 @@ class RootPostNotFoundOrItDeletedException : MyException() {
 class CommentNotFoundException : MyException() {
     override fun errorType() = ErrorCode.COMMENT_NOT_FOUND
 }
+
+class FileIsNotUploadException : MyException() {
+    override fun errorType() = ErrorCode.FILE_IS_NOT_UPLOAD
+}

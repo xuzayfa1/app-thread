@@ -28,3 +28,10 @@ spring:
             - Path=/follow/**
           filters:
             - StripPrefix=1
+        # FILE SERVICE
+        - id: file-service
+          uri: http://localhost:8084
+          predicates:
+            - Path=/file/**
+          filters:
+            - StripPrefix=1

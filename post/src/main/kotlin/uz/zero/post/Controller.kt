@@ -15,24 +15,24 @@ class PostController(private val postService: PostService) {
         @RequestParam content: String,
         @RequestParam(required = false) parentId: Long?,
         @RequestParam(required = false) files: List<MultipartFile>?
-    ): ResponseEntity<PostResponse> {
-        return ResponseEntity.ok(postService.createPost(userId, content, parentId, files))
+    ): PostResponse{
+        return postService.createPost(userId, content, parentId, files)
     }
 
     @PostMapping("/{postId}/like")
-    fun like(@PathVariable postId: Long, @RequestParam userId: Long): ResponseEntity<LikeResponse> {
+    fun like(@PathVariable postId: Long, @RequestParam userId: Long): LikeResponse {
         val result = postService.toggleLike(postId, userId)
-        return ResponseEntity.ok(result)
+        return result
     }
 
     @PostMapping("/{postId}/comment")
-    fun comment(@PathVariable postId: Long, @RequestBody request: CommentRequest): ResponseEntity<CommentResponse> {
-        return ResponseEntity.ok(postService.addComment(postId, request.userId, request.text))
+    fun comment(@PathVariable postId: Long, @RequestBody request: CommentRequest): CommentResponse {
+        return postService.addComment(postId, request.userId, request.text)
     }
 
     @GetMapping("/thread/{postId}")
-    fun getThread(@PathVariable postId: Long): ResponseEntity<List<PostResponse>> {
-        return ResponseEntity.ok(postService.getFullThread(postId))
+    fun getThread(@PathVariable postId: Long): List<PostResponse> {
+        return postService.getFullThread(postId)
     }
 
     @DeleteMapping("/{id}")

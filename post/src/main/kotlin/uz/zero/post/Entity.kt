@@ -43,6 +43,7 @@ class Post(
     var rootId: Long? = null
 ) : BaseEntity()
 
+
 @Entity
 @Table(name = "comments")
 class Comment(

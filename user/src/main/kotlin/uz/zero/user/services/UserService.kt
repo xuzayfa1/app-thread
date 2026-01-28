@@ -36,10 +36,9 @@ class UserServiceImpl(
         val user = User(
             username = dto.username,
             email = dto.email,
-            passwordHash = dto.password // Hozircha oddiy saqlaymiz
-        ).apply {
-            fullName = dto.fullName
-        }
+            passwordHash = dto.password, // Hozircha oddiy saqlaymiz
+            fullName = dto.fullName,
+        )
 
         val savedUser = userRepository.save(user)
 

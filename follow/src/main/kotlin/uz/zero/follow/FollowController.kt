@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.RestController
 class FollowController(private val followService: FollowService) {
 
     @PostMapping
-    fun follow(@RequestBody request: FollowRequest): ResponseEntity<FollowResponse> {
+    fun follow(@RequestBody request: FollowRequest): FollowResponse {
         val result = followService.follow(request.followerId, request.followingId)
-        return ResponseEntity.ok(result)
+        return result
     }
 
     @PostMapping("/unfollow")
