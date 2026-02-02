@@ -10,3 +10,8 @@ spring:
       fail-fast: true
       username: user
       password: nimadirxavfsizlik # Config serverdagi xavfsizlik paroli
+
+logging:
+  level:
+    org.springframework.security: DEBUG
+    org.springframework.web: DEBUG

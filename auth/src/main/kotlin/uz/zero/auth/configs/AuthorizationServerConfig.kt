@@ -4,7 +4,6 @@ import org.springframework.boot.autoconfigure.security.oauth2.server.servlet.OAu
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.core.annotation.Order
-import org.springframework.http.HttpMethod
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.http.SessionCreationPolicy
@@ -16,12 +15,12 @@ import org.springframework.security.oauth2.server.authorization.settings.Authori
 import org.springframework.security.oauth2.server.authorization.token.*
 import org.springframework.security.oauth2.server.authorization.web.authentication.OAuth2AccessTokenResponseAuthenticationSuccessHandler
 import org.springframework.security.web.SecurityFilterChain
-import uz.zero.auth.model.security.CustomUserDetails
 import uz.zero.auth.components.AuthServerAuthenticationConverter
 import uz.zero.auth.components.AuthServerAuthenticationProvider
 import uz.zero.auth.components.JwtAuthenticationConverter
 import uz.zero.auth.constants.JWT_ROLE_KEY
 import uz.zero.auth.constants.JWT_USER_ID_KEY
+import uz.zero.auth.model.security.CustomUserDetails
 
 @Configuration
 class AuthorizationServerConfig {
