@@ -23,14 +23,14 @@ class RegisteredClientLoader(
 
     override fun run(vararg args: String?) {
         try {
-            if (authClientRepository.findByClientId("ios") != null) return
+            if (authClientRepository.findByClientId("windows") != null) return
             logger.info("Creating client...")
             val newClient = RegisteredClient
                 .withId(UUID.randomUUID().toString())
-                .clientId("ios")
+                .clientId("windows")
                 .clientIdIssuedAt(Instant.now())
                 .clientSecret(passwordEncoder.encode("test"))
-                .clientName("ios")
+                .clientName("windows")
                 .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
                 .authorizationGrantTypes {
                     it.add(AuthorizationGrantType.JWT_BEARER)
