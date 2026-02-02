@@ -1,6 +1,7 @@
 package uz.zero.post
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import java.util.Date
 
 data class BaseMessage(val code: Int? = null, val message: String? = null) {
@@ -47,4 +48,12 @@ data class UserResponseDto(val id: Long)
 data class LikeResponse(
     val message: String,
     val postId: Long,
+)
+
+@JsonIgnoreProperties(ignoreUnknown = true)
+data class UserInfoResponse(
+    val id: Long,
+    val fullName: String,
+    val username: String,
+    val role: String,
 )

@@ -21,13 +21,13 @@ repositories {
 extra["springCloudVersion"] = "2024.0.1"
 
 dependencies {
+    runtimeOnly("io.netty:netty-resolver-dns-native-macos:4.1.119.Final:osx-aarch_64")
+    implementation("org.springframework.boot:spring-boot-starter-oauth2-resource-server")
+    implementation("io.projectreactor.kotlin:reactor-kotlin-extensions")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
     implementation("org.springframework.cloud:spring-cloud-starter-gateway")
     implementation("org.springframework.cloud:spring-cloud-starter-config")
-    testImplementation("org.springframework.boot:spring-boot-starter-test")
-    testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
-    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
 dependencyManagement {
     imports {

@@ -20,18 +20,18 @@ class FollowController(private val followService: FollowService) {
     }
 
     @PostMapping("/unfollow")
-    fun unfollow(@RequestParam followerId: Long, @RequestParam followingId: Long): ResponseEntity<FollowResponse> {
+    fun unfollow(@RequestParam followerId: Long, @RequestParam followingId: Long): FollowResponse {
         val result = followService.unfollow(followerId, followingId)
-        return ResponseEntity.ok(result)
+        return result
     }
 
     @GetMapping("/{userId}/followers")
-    fun getFollowers(@PathVariable userId: Long): ResponseEntity<List<Long>> {
-        return ResponseEntity.ok(followService.getFollowers(userId))
+    fun getFollowers(@PathVariable userId: Long): List<Long> {
+        return followService.getFollowers(userId)
     }
 
     @GetMapping("/{userId}/following")
-    fun getFollowing(@PathVariable userId: Long): ResponseEntity<List<Long>> {
-        return ResponseEntity.ok(followService.getFollowing(userId))
+    fun getFollowing(@PathVariable userId: Long): List<Long> {
+        return followService.getFollowing(userId)
     }
 }

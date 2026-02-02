@@ -1,5 +1,6 @@
 package uz.zero.user
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import jakarta.validation.constraints.Email
 import jakarta.validation.constraints.NotBlank
 import jakarta.validation.constraints.Size
@@ -58,5 +59,13 @@ data class UserRegistrationDto(
     val password: String,
 
     val fullName: String? = null
+)
+
+@JsonIgnoreProperties(ignoreUnknown = true)
+data class UserInfoResponse(
+    val id: Long,
+    val fullName: String,
+    val username: String,
+    val role: String,
 )
 

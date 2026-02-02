@@ -1,13 +1,18 @@
 package uz.zero.post
 
+import com.fasterxml.jackson.databind.ObjectMapper
 import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
+import org.springframework.security.core.annotation.AuthenticationPrincipal
+import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.multipart.MultipartFile
 
 @RestController
 @RequestMapping("/api/v1/posts")
-class PostController(private val postService: PostService) {
+class PostController(
+    private val postService: PostService,
+) {
 
     @PostMapping(consumes = [MediaType.MULTIPART_FORM_DATA_VALUE])
     fun create(
@@ -36,8 +41,8 @@ class PostController(private val postService: PostService) {
     }
 
     @DeleteMapping("/{id}")
-    fun delete(@PathVariable id: Long): ResponseEntity<Unit> {
+    fun delete(@PathVariable id: Long): Unit {
         postService.deletePost(id)
-        return ResponseEntity.noContent().build()
+        return
     }
 }

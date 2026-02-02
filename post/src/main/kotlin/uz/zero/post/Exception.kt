@@ -88,3 +88,8 @@ class CommentNotFoundException : MyException() {
 class FileIsNotUploadException : MyException() {
     override fun errorType() = ErrorCode.FILE_IS_NOT_UPLOAD
 }
+
+class UnauthorizedException : MyException() {
+    override fun errorType() = ErrorCode.USER_NOT_FOUND
+}
+
